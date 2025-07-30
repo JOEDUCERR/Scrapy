@@ -1,2 +1,6 @@
-ai
-__pycache__
+ai/
+env/
+venv/
+.venv/
+
+__pycache__/
