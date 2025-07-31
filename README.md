@@ -3,6 +3,8 @@
 **A Web Scraper Retrieval-Augmented Generation (RAG) System**  
 Built using **Selenium**, **Streamlit**, and **Bright Data Web Scraping API**
 
+P.S. If you are not seeing the desired output from a popular website it may be because they are using anti-bot and security mechanisms.
+
 ---
 
 ## 📌 Overview
