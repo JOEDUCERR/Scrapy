@@ -1,9 +1,15 @@
 # from langchain_ollama import OllamaLLM
 
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 import os
 
+from dotenv import load_dotenv
+# load_dotenv()
+
+
 from langchain_core.prompts import ChatPromptTemplate
+
+import streamlit as st
 
 template = (
     "You are tasked with extracting specific information from the following text content: {dom_content}. "
@@ -13,12 +19,14 @@ template = (
     "3. **Empty Response:** If no information matches the description, return an empty string ('')."
     "4. **Direct Data Only:** Your output should contain only the data that is explicitly requested, with no other text."
 )
+openai_api_key = st.secrets["OPENAI_API_KEY"]
 
 # model = OllamaLLM(model="llama2")
 model = ChatOpenAI(
     model_name="gpt-3.5-turbo",
     temperature=0,
-    openai_api_key=os.getenv("OPENAI_API_KEY")
+    # openai_api_key=os.getenv("OPENAI_API_KEY")
+    openai_api_key=openai_api_key
     )
 
 def parse_with_ollama(dom_chunks, parse_description):
@@ -31,6 +39,6 @@ def parse_with_ollama(dom_chunks, parse_description):
         response = chain.invoke({"dom_content": chunk, "parse_description": parse_description}
                                 )
         print(f"Parsed batch {i} of {len(dom_chunks)}")
-        parsed_results.append(response)
+        parsed_results.append(response.content)
 
     return "\n".join(parsed_results)

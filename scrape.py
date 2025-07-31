@@ -13,7 +13,9 @@ from selenium.webdriver.common.by import By
 
 from bs4 import BeautifulSoup
 
-AUTH = 'brd-customer-hl_7ab40833-zone-ai_scraper:yg12kz44m8z7'
+import streamlit as st
+
+AUTH = st.secrets["BRIGHT_DATA_AUTH"]
 SBR_WEBDRIVER = f'https://{AUTH}@brd.superproxy.io:9515'
 
 def scrape_website(website):
